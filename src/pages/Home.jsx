@@ -1,17 +1,20 @@
 import { useState, useEffect, useCallback, memo } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiChevronDown } from "react-icons/fi";
-import CountryCard from "../component/CountryCard";
 import { useFetch } from "../component/useFetch";
 import { Link } from "react-router-dom";
+import CountryCard from "../component/CountryCard";
+import PreLoader from "../component/PreLoader";
+import Error from "../component/Error";
 
 const url = "https://restcountries.com/v2/all";
 
 const continents = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
-const Home = () => {
+const Home = memo(() => {
+  // custom hooks
+  const { isLoading, countryData, isError } = useFetch(url);
   // hooks
-  const { isLoading, countryData } = useFetch(url);
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -21,7 +24,7 @@ const Home = () => {
         setData(countryData);
       }
     }, [countryData]),
-    [countryData]
+    [url]
   );
 
   // functions
@@ -30,7 +33,7 @@ const Home = () => {
     if (region === "All") {
       setData(countryData);
     } else {
-      // set data back to default before filtering.
+      // set data back to default  before filtering.
       setData(countryData);
 
       // filter region based on user selected region
@@ -62,11 +65,11 @@ const Home = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="loader__container">
-        <div className="custom-loader"></div>;
-      </div>
-    );
+    return <PreLoader />;
+  }
+
+  if (isError) {
+    return <Error />;
   }
 
   return (
@@ -121,6 +124,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Home;

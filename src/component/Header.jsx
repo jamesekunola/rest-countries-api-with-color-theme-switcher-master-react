@@ -7,8 +7,8 @@ const Header = ({ isLightMode, toggleTheme }) => {
       <h3>Where in the world?</h3>
 
       <div className="header__theme_switch" onClick={toggleTheme}>
-        {isLightMode ? <IoMoon className="dark__moonIcon" /> : <FaRegMoon />}
-        <p>{isLightMode ? "Dark Mode" : "Light Mode"}</p>
+        {!isLightMode ? <IoMoon className="dark__moonIcon" /> : <FaRegMoon />}
+        <p>{!isLightMode ? "Dark Mode" : "Light Mode"}</p>
       </div>
     </div>
   );
