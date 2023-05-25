@@ -2,11 +2,11 @@ import React from "react";
 
 const PreLoader = () => {
   return (
-    <div>
+    <main>
       <div className="loader__container">
         <div className="custom-loader"></div>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -73,56 +73,58 @@ const Home = memo(() => {
   }
 
   return (
-    <div className="hero__container">
-      {/* hero left */}
+    <main>
+      <div className="hero__container">
+        {/* hero left */}
 
-      <div className="hero__header">
-        <div className="hero__left">
-          <div className="hero__search_box">
-            <form onSubmit={handleSubmit}>
-              <AiOutlineSearch />
-              <input
-                type="text"
-                placeholder="Search for a country..."
-                value={searchInput}
-                onChange={searchCountries}
-              />
-            </form>
+        <div className="hero__header">
+          <div className="hero__left">
+            <div className="hero__search_box">
+              <form onSubmit={handleSubmit}>
+                <AiOutlineSearch />
+                <input
+                  type="text"
+                  placeholder="Search for a country..."
+                  value={searchInput}
+                  onChange={searchCountries}
+                />
+              </form>
+            </div>
+          </div>
+
+          {/* hero right */}
+          <div className="hero__right">
+            <div className="region__title">
+              <p>Filter by Region</p>
+              <FiChevronDown />
+            </div>
+
+            {/* dropdown box */}
+            <div className="hero__region__dropdown">
+              {continents.map((continent, index) => (
+                <button
+                  key={index}
+                  onClick={() => displaySelectedRegion(continent)}
+                >
+                  {continent}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* hero right */}
-        <div className="hero__right">
-          <div className="region__title">
-            <p>Filter by Region</p>
-            <FiChevronDown />
-          </div>
-
-          {/* dropdown box */}
-          <div className="hero__region__dropdown">
-            {continents.map((continent, index) => (
-              <button
-                key={index}
-                onClick={() => displaySelectedRegion(continent)}
-              >
-                {continent}
-              </button>
-            ))}
-          </div>
+        {/* cards */}
+        <div className="hero__cardContainer">
+          {data?.map((info) => (
+            <div className="card" key={info.alpha3Code}>
+              <Link to={`/details/${info.name}`}>
+                <CountryCard {...info} />
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* cards */}
-      <div className="hero__cardContainer">
-        {data?.map((info) => (
-          <div className="card" key={info.alpha3Code}>
-            <Link to={`/details/${info.name}`}>
-              <CountryCard {...info} />
-            </Link>
-          </div>
-        ))}
-      </div>
-    </div>
+    </main>
   );
 });
 
