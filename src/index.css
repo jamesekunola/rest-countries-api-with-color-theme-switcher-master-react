@@ -169,6 +169,7 @@ img {
 }
 
 .card {
+  color: var(--text-color);
   max-width: 30.76rem;
   margin: 0 auto;
   width: 100%;
@@ -229,7 +230,6 @@ img {
 
 .card__text h2 {
   margin-bottom: 1rem;
-  color: var(--text-color);
 }
 
 .card__text p {
