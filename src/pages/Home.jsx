@@ -7,25 +7,17 @@ import CountryCard from "../component/CountryCard";
 import PreLoader from "../component/PreLoader";
 import Error from "../component/Error";
 
-const url = "https://restcountries.com/v2/all";
-
 const continents = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
-const Home = memo(() => {
-  // custom hooks
-  const { isLoading, countryData, isError } = useFetch(url);
-  // hooks
-  const [data, setData] = useState([]);
+const Home = memo(({ isLoading, isError, countryData }) => {
   const [searchInput, setSearchInput] = useState("");
+  const [data, setData] = useState([]);
 
-  useCallback(
-    useEffect(() => {
-      if (!isLoading) {
-        setData(countryData);
-      }
-    }, [countryData]),
-    [url]
-  );
+  useEffect(() => {
+    if (!isLoading) {
+      setData(countryData);
+    }
+  }, [countryData]);
 
   // functions
   // func to filter country by region based on selected region.
@@ -49,7 +41,7 @@ const Home = memo(() => {
     const inp1 = inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
     setSearchInput(inp1);
 
-    // revert back to initial data when a button is being clicked
+    // revert back to initial data when a text is been entered
     setData(countryData);
 
     // update ui with searched result
